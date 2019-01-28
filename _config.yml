@@ -4,7 +4,7 @@ highlighter:      rouge
 
 # Setup
 title:            Cryptis CTF
-tagline:          'A Jekyll theme'
+tagline:          We're a CTF team from Limoges, France
 description:      We're a CTF team from Limoges, France
 url:              http://teamcryptis.fr/
 baseurl:          ''
@@ -15,15 +15,14 @@ baseurl:          ''
                   # sidebar_blog_link below.
 
 author:
-  name:           'Andrew Fong'
-  url:            https://twitter.com/fongandrewc
+  name:           'Team Cryptis'
+  url:            https://twitter.com/TeamCryptis
 
-paginate:         5
+paginate:         10
 # paginate_path:    '/page:num'
                     # Or '/blog/page:num' if you want to move your index pages
 
 plugins:
-  - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
 
