@@ -4,8 +4,8 @@ highlighter:      rouge
 
 # Setup
 title:            Cryptis CTF
-tagline:          We're a CTF team from Limoges, France
-description:      We're a CTF team from Limoges, France
+tagline:          We're a CTF Team from Limoges, France
+description:      We're a CTF Team from Limoges, France
 url:              http://teamcryptis.fr/
 baseurl:          ''
                   # the optional subpath of your site, e.g. "/blog"
