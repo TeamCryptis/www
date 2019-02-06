@@ -25,6 +25,7 @@ paginate:         10
 plugins:
   - jekyll-gist
   - jekyll-paginate
+  - jekyll-feed
 
 # Sidebar link settings
 sidebar_home_link:  true
