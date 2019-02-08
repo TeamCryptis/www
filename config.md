@@ -6,11 +6,13 @@ sidebar_link: true
 
 Pour avoir accès à la plateforme de challenges ([CTFd](https://github.com/CTFd/CTFd)), vous devez configurer votre machine afin qu'elle puisse accèder au bon réseau.
 Cette configuration est divisée en 2 étapes :
-* Configurer l'hôte (Windows ou Linux)
-* Configurer [VirtualBox](https://virtualbox.org)
+* [Configurer l'hôte](#configurer-l'hôte)
+  - [Windows](#windows)
+  - [Linux](#linux)
+* [Configurer VirtualBox](#configurer-virtualbox)
 
 ---
-# Configuration de l'hôte
+# Configurer l'hôte
 ---
 
 ---
