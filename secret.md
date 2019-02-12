@@ -6,7 +6,7 @@ sidebar_link: false
 
 Bonjour,
 
-CRYPTIS{10_points_:)}
+`CRYPTIS{10_points_:)}`
 
 Cordialement,
 Famulus :)
