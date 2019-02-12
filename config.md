@@ -97,4 +97,6 @@ A cette étape, vous avez normalement accès à la platforme depuis votre systè
 
 Arrivez sur la fenêtre de configuration, sélectionnez "**Réseau**". Et sur l'onglet "**Interface 1**", cochez la case "**Activer l'interface réseau**" et choisissez le mode d'accès réseau "**NAT**". Enregistrez et lancez votre VM. Vous avez maintenant un accès à internet ainsi que la possibilité de joindre la plateforme pour le CTF.
 
+<img class="center" src="/assets/images/config/vb-c3.png" alt="VirtualBox configuration">
+
 Si vous rencontrez des problèmes, n'hésitez pas à soliciter les organisateurs :)
