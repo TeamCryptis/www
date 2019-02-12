@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "EVENTS_01 - Write-ups"
+title: "EVENTS_01 - Writeups"
 categories: Events
 excerpt_separator:  <!--more-->
 ---
