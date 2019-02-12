@@ -75,7 +75,7 @@ Enregistrez vos modifications, il vous faut maintenant configurer **VirtualBox**
 $ sudo systemctl stop network-manager
 
 # configurer l'interface filaire
-$ sudo ip addr add 10.10.10.1/24 dev eth0
+$ sudo ip addr add 10.10.10.100/24 dev eth0
 
 # relancer le service
 $ sudo systemctl start network-manager
