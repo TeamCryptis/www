@@ -34,14 +34,15 @@ article + *, .post-body ~ section {
 
 // h1-size h2
 h2.post-title, h2.page-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 // Meta data line below post title
 .post-meta {
-  margin-top: -.5rem;
-  margin-bottom: 1rem;
+  margin-top: -0.7rem;
+  
   color: $body-muted;
+  font-size: 1em;
 }
 
 .post-tags a {
