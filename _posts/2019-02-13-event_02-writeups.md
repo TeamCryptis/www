@@ -9,11 +9,12 @@ excerpt_separator:  <!--more-->
 ### Date : 13/02/2019 - 18h (<a href="https://slides.com/adelalm/event_02" target="_blank">slides</a>)
 
 <details><summary><h3 style="display: inline;">Menu</h3></summary><ul><li><a href="#stega_0001_welcome">stega_0001_welcome</a></li>
+<li><a href="#stega_0010_mail">stega_0010_mail</a></li>
 <li><a href="#stega_0100_titanic">stega_0100_titanic</a></li>
 <li><a href="#stega_0200_art">stega_0200_art</a></li>
 <li><a href="#stega_0300_johnny">stega_0300_johnny</a></li>
 <li><a href="#stega_0300_mysterybox">stega_0300_mysterybox</a></li>
-<li><a href="#sonic_0200_sonic">sonic_0200_sonic</a></li>
+<li><a href="#stega_0200_sonic">stega_0200_sonic</a></li>
 <li><a href="#stega_0300_jon">stega_0300_jon</a></li>
 <li><a href="#stega_0199_inutile_v2">stega_0199_inutile_v2</a></li>
 <li><a href="#stega_0300_anti_sonic">stega_0300_anti_sonic</a></li>
@@ -62,10 +63,53 @@ $ flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
 
 `CRYPTIS{Welc0m3_1n_5teg4no}`
 
-CRYPTIS{10_points_:)}
+# stega_0010_mail
 
-flag sur le site de la teamcryptis http://teamcryptis.fr/secret.html
+------
 
+### Titre : Mail
+
+### Points : 10
+
+------
+
+### Description
+
+------
+
+Cherchez un flag dans le mail que vous avez reçu pour cet événement.
+
+------
+
+### Réalisation
+
+------
+
+Nous allons ajouter un lien qui va pointer sur une page `secret.html` sur le site [teamcryptis.fr](http://team-cryptis.fr). Nous allons encoder ce lien en `base64`.
+
+```bash
+$ echo -n 'http://teamcryptis.fr/secret.html' | base64
+aHR0cDovL3RlYW1jcnlwdGlzLmZyL3NlY3JldC5odG1s
+```
+
+On ajoute donc `aHR0cDovL3RlYW1jcnlwdGlzLmZyL3NlY3JldC5odG1s` à la fin du mail de l'`event_02`.
+
+------
+
+### Résolution
+
+------
+
+En regardant le mail, on voit une chaine de caractères qui se trouve tout en bas. Il s'agit d'un encodage en `base64`. Il faut alors le décoder.
+
+```bash
+$ echo -n 'aHR0cDovL3RlYW1jcnlwdGlzLmZyL3NlY3JldC5odG1s' | base64 -d
+http://teamcryptis.fr/secret.html
+```
+
+On se rend sur le site, et le flag se trouve bien sur la page.
+
+`CRYPTIS{10_points_:)}`
 # stega_0100_titanic
 
 ---
@@ -366,7 +410,7 @@ On obtient un dossier dans lequel on retrouve le flag.txt
 
 `CRYPTIS{S1mpl3_St3g4}`
 
-# sonic_0200_sonic
+# stega_0200_sonic
 
 ---
 
