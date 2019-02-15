@@ -963,7 +963,7 @@ Michael Jackson serait-il toujours parmi nous ?
 
 ---
 
-Le challenge a été fait pour faire découvrir que l'on peut cacher des informations en LSB aussi en musique. 
+Le challenge a été fait pour faire découvrir que l'on peut cacher des informations en LSB aussi en musique.
 
 LSB => on va cacher des données dans les bytes de poids faibles de la musique.
 
@@ -1012,7 +1012,7 @@ for i, bit in enumerate(bits):
     # exemple :
     #  1010 1011 & 254 => 1010 1010
     # puis un ou logique pour ajouter le bit contenant notre information
-    # 1010 1010 & 1 => 1010 1011
+    # 1010 1010 | 1 => 1010 1011
     frame_bytes[i] = (frame_bytes[i] & 254) | bit
 
 # on convertir en bytes
@@ -1044,16 +1044,15 @@ for i in range(len(frame_bytes)):
     #On fait un & logique avec 1 pour obtenir le dernier bit
     extracted.append(frame_bytes[i] & 1)
 
-# extracted = [frame_bytes[i] & 1 for i in range(len(frame_bytes))]
 string_array=[]
 for i in range(0,len(extracted),8):
     #on recuperes les 8 prochains bits (String)
     bites="".join(map(str,extracted[i:i+8]))
     #on le convertis en binaire
     decimal=int(bites,2)
-    #on ajoute le caractere
     if chr(decimal) =="#":
         break
+    #on ajoute le caractere
     string_array.append(chr(decimal))
 
 string = "".join(string_array)
