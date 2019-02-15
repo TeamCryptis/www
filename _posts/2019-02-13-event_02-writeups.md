@@ -22,7 +22,7 @@ excerpt_separator:  <!--more-->
 <li><a href="#stega_0300_colorimetrie">stega_0300_colorimetrie</a></li>
 <li><a href="#stega_0250_html">stega_0250_html</a></li>
 <li><a href="#stega_0400_samuel">stega_0400_samuel</a></li>
-<li><a href="#stega_0400_lsb">stega_0400_lsb</a></li>
+<li><a href="#stega_0600_lsb">stega_0600_lsb</a></li>
 </ul></details>
 
 # stega_0001_welcome
@@ -942,13 +942,13 @@ Une fois déchiffré avec le site http://www.unit-conversion.info/texttools/mors
 
 `CRYPTIS{m0rse_1s_th3_n3w_fl4g}`
 
-# stega_0400_lsb
+# stega_0600_lsb
 
 ---
 
 ### Titre : lsb
 
-### Points : 400
+### Points : 600
 ---
 
 ### Description
@@ -963,28 +963,62 @@ Michael Jackson serait-il toujours parmi nous ?
 
 ---
 
+Le challenge a été fait pour faire découvrir que l'on peut cacher des informations en LSB aussi en musique. 
+
+LSB => on va cacher des données dans les bytes de poids faibles de la musique.
+
+Ainsi, lorsque l'on écoute la musique, on entend absolument rien de choquant cependant un message a été caché à l'intérieur de celle-ci ;-) .
+
 ```python
+#!/usr/bin/python3
 import wave
 
 # read wave audio file
 song = wave.open("michael.wav", mode='rb')
-# Read frames and convert to byte array
+
+# lecture de la musique
+# song.getnframes => retourne le nombre de frame audio
+# song.readframes => retourne n frames de la musique (String de bits)
+# list => convertir une chaine de caractères en liste
+# bytearray => retourne un objet de type bytearray
 frame_bytes = bytearray(list(song.readframes(song.getnframes())))
 
-# The "secret" text message
 string='CRYPTIS{M1ch43l_J4cks0n_st1ll_4_l1v3}'
-# Append dummy data to fill out rest of the bytes. Receiver shall detect and remove these characters.
-string = string + int((len(frame_bytes)-(len(string)*8*8))/8) *'#'
-# Convert text to bit array
-bits = list(map(int, ''.join([bin(ord(i)).lstrip('0b').rjust(8,'0') for i in string])))
+#On va completer la suite par des #
+nbhast=int((len(frame_bytes)-(len(string)*8*8))/8)
+string = string + nbhast*'#'
 
-# Replace LSB of each byte of the audio data by one bit from the text bit array
+
+# Convert text to bit array
+tableau=[]
+for caractere in string:
+    # valeur_binaire du caractere qu'on va ajouter
+    valeur_binaire=bin(ord(caractere))
+
+    # 0b1110100.lstrip('0b') ==> 1110100
+    # 1110100.rjust(8,'0') ==> 01110100 -- ajoute des 0 pr que le nombre de bits soit de 8
+    valeur_binaire=valeur_binaire.lstrip('0b').rjust(8,'0')
+    tableau.append(valeur_binaire)
+
+# Convertir la liste de string en liste de int (où chaque valeur du tableau est 1 bits)
+# exemple :
+#  ['01000011', '01010010'] ==> [0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0]
+bits = list(map(int, ''.join(tableau)))
+
+# On va remplacer les bites de
 for i, bit in enumerate(bits):
+    # on a nos 8 bits
+    # on va faire un & logique avec 254 pour le dernier bit a 0
+    # exemple :
+    #  1010 1011 & 254 => 1010 1010
+    # puis un ou logique pour ajouter le bit contenant notre information
+    # 1010 1010 & 1 => 1010 1011
     frame_bytes[i] = (frame_bytes[i] & 254) | bit
-# Get the modified bytes
+
+# on convertir en bytes
 frame_modified = bytes(frame_bytes)
 
-# Write bytes to a new wave audio file
+#on ecrit le nouveau fichier
 with wave.open('song_embedded.wav', 'wb') as fd:
     fd.setparams(song.getparams())
     fd.writeframes(frame_modified)
@@ -998,23 +1032,36 @@ song.close()
 ---
 
 ```python
-# Use wave package (native to Python) for reading the received audio file
+#!/usr/bin/python3
 import wave
 song = wave.open("song_embedded.wav", mode='rb')
-# Convert audio to byte array
+
+#On obtient un objet de type bytearray representant notre musique
 frame_bytes = bytearray(list(song.readframes(song.getnframes())))
 
-# Extract the LSB of each byte
-extracted = [frame_bytes[i] & 1 for i in range(len(frame_bytes))]
-# Convert byte array back to string
-string = "".join(chr(int("".join(map(str,extracted[i:i+8])),2)) for i in range(0,len(extracted),8))
-# Cut off at the filler characters
-decoded = string.split("###")[0]
+extracted=[]
+for i in range(len(frame_bytes)):
+    #On fait un & logique avec 1 pour obtenir le dernier bit
+    extracted.append(frame_bytes[i] & 1)
 
-# Print the extracted text
-print("Sucessfully decoded: "+decoded)
+# extracted = [frame_bytes[i] & 1 for i in range(len(frame_bytes))]
+string_array=[]
+for i in range(0,len(extracted),8):
+    #on recuperes les 8 prochains bits (String)
+    bites="".join(map(str,extracted[i:i+8]))
+    #on le convertis en binaire
+    decimal=int(bites,2)
+    #on ajoute le caractere
+    if chr(decimal) =="#":
+        break
+    string_array.append(chr(decimal))
+
+string = "".join(string_array)
+
+print("Sucessfully decoded: "+string)
 song.close()
 ```
+
 ```bash
 $ python3 decrypt.py
 Sucessfully decoded: CRYPTIS{M1ch43l_J4cks0n_st1ll_4_l1v3}
