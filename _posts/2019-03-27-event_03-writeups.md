@@ -55,7 +55,9 @@ CI3u_7yRSn3c4sY{v_rnePbe3y@}T1nnpl
 ---
 
 CRYPTIS{b13nvenu3_3n_cryp74n@lyse}
+Le but de ce challenge est d'échauffer votre capacité d'analyse, une simple analyse de la structure du chiffré à partir d'un mot connu, suffit à déceler ce chiffrement.
 
+* Script de la scytale avec un clair et une clé donné :
 ```python
 #!/usr/bin/python3
 import os, sys
@@ -143,6 +145,7 @@ CRYPTIS{b13nvenu3_3n_cryp74n@lyse}
 ATTENTION : Si vous choisissez d'utiliser un site tel que [www.dcode.fr](www.dcode.fr), n'oubliez pas de préserver la ponctuation !
 
 `CRYPTIS{b13nvenu3_3n_cryp74n@lyse}`
+
 # crypto_0100_asr
 
 ---
@@ -274,6 +277,7 @@ CRYPTIS{keys_manager_expert_<3}
 C'était donc bien ça, `pub_key.pem` est en réalité `priv_key.pem`. Les 2 clés ont donc été inversées.
 
 `CRYPTIS{keys_manager_expert_<3}`
+
 # crypto_0100_brutus
 
 ------
@@ -363,6 +367,7 @@ Bonne chance.
 Il suffit de concaténer les clés trouvées afin d'obtenir le flag !
 
 `CRYPTIS{petit_cesar_optimise}`
+
 # crypto_0100_gilbert
 
 ---
@@ -414,6 +419,7 @@ bl1nd_s3cr3t
 ```
 
 `CRYPTIS{bl1nd_s3cr3t}`
+
 # crypto_0150_aqzwe
 
 ---
@@ -456,6 +462,7 @@ Go to => [Dcode](https://www.dcode.fr/chiffre-decalage-clavier)
 mettre le message et déchiffrer
 
 `CRYTPIS{C0up3r_D3c4l3r}`
+
 # crypto_0150_blaise
 
 ---
@@ -520,6 +527,7 @@ BONJOURPETITCHIFFREMENTDEBLAISEPOURSECHAUFFERDANSCECTFDECRYPTODEPECHEZVOUSDERENT
 Il ne reste plus qu'à remettre la ponctuation et les minuscules à `CRYPTISBLAISEFOREVERCOEURCOEUR`:
 
 `CRYPTIS{blaise_forever_coeur_coeur}`
+
 # crypto_0150_square
 
 ---
@@ -563,6 +571,7 @@ QR-Code:CRYPTIS{QRC0D3_15_4_TH1NG}
 ```
 
 `CRYPTIS{QRC0D3_15_4_TH1NG}`
+
 # crypto_0200_in_the_title
 
 ---
@@ -704,6 +713,7 @@ Sp?tni? is a spacecraft la?nched ?nder the So?iet space program. Sp?tni? 1,2 and
 Nous avons donc le début du flag : `CRYPTIS{mayde_mayde_the_flag_is_` il ne reste plus qu'à lui concaténer le nom du challenge.
 
 `CRYPTIS{mayde_mayde_the_flag_is_in_the_title}`
+
 # crypto_0200_metamorphe
 
 ---
@@ -814,6 +824,7 @@ En effet, c'était bien de la base octal ! Il ne reste plus qu'à rentrer le fla
 
 `CRYPTIS{I_h0p3_y0u_did_n0t_try_t0_d3crypt_on3_by_on3_4g@1n_;-)}`
 
+
 # crypto_0200_my_brain
 
 ---
@@ -859,6 +870,7 @@ Utilisation de https://www.dcode.fr/langage-brainfuck afin de décoder:
 On obtient alors le flag.
 
 `CRYPTIS{w31rd_fuck1ng_l4ng4g3}`
+
 # crypto_0300_divina_commedia
 
 ---
@@ -898,6 +910,7 @@ Une recherche google avec :
 Et on trouve le language [Malbolge](https://zb3.me/malbolge-tools/#interpreter)
 
 `CRYPTIS{Wtf_M4lb0lg3_?}`
+
 # crypto_0300_h
 
 ---
@@ -1026,6 +1039,7 @@ def client():
 `CRYPTIS{tr1pl3_h4sh}`
 
 
+
 # crypto_0300_over26
 
 ---
@@ -1074,6 +1088,7 @@ On retrouve dans les "recettes" ROT 47. On l'utilisera avec comme décalage -27.
 On obtient alors le flag.
 
 `CRYPTIS{3xt3nd3d_r0t}`
+
 # crypto_0300_png
 
 ---
@@ -1156,6 +1171,7 @@ Notre clé est donc `57 49 4E 44 4F 57 53 57`, convertie en ascii, nous avons le
 Utilisons maintenant CyberChef avec en input l'image et appliquant un XOR avec la clé `WINDOWSW` et récupérer l'output. On obtient alors une vraie image, avec le flag à l'intérieur.
 
 `CRYPTIS{X0R_1M4G3_34SY}`
+
 # crypto_0300_raptorisation
 
 ------
@@ -1345,6 +1361,7 @@ $ python RsaCtfTool.py --publickey ./pub_key.pem --uncipherfile ./ciphertext.txt
 ```
 
 `CRYPTIS{rsa_factorisation_heavy}`
+
 # crypto_0400_boing
 
 ---
@@ -1456,6 +1473,7 @@ def dechiffrement():
 ```
 
 `CRYPTIS{B4s3_1s_n0t_s3cur3}`
+
 # crypto_0400_brutor
 
 ---
@@ -1541,6 +1559,7 @@ for l in f: 										# Pour chaque mot dans rockyou
 ```
 
 `CRYPTIS{435_15_345Y}`
+
 # crypto_0400_rsa_server
 
 ---
@@ -1857,6 +1876,7 @@ b'CRYPTIS{rsa_sp3cialist_since_26/03/2019}'
 ```
 
 `CRYPTIS{rsa_sp3cialist_since_26/03/2019}`
+
 # crypto_0500_inutile_v3
 
 ---
