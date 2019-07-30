@@ -1166,7 +1166,7 @@ Si on XOR l'entête des PNG et l'entête de notre fichier, on retrouve la clé X
  -----------------------
  57 49 4E 44 4F 57 53 57
 ```
-Notre clé est donc `57 49 4E 44 4F 57 53 57`, convertie en ascii, nous avons le clé: `WINDOWSW`.
+Notre clé est donc `57 49 4E 44 4F 57 53 57`, convertie en ascii, nous avons le clé: `WINDOWSW`.
 
 Utilisons maintenant CyberChef avec en input l'image et appliquant un XOR avec la clé `WINDOWSW` et récupérer l'output. On obtient alors une vraie image, avec le flag à l'intérieur.
 
