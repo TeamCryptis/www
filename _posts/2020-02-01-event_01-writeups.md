@@ -455,7 +455,7 @@ cebprff_zvk
 ```
 
 * Le résultat ne veut pas dire grand chose et le tester en tant que flag n'est pas concluant.
-* Voici un script tester tous les décalages possibles dans l'alphabet courant.
+* Voici un script pour tester tous les décalages possibles dans l'alphabet courant.
 
 ```python
 #!/usr/bin/python3
