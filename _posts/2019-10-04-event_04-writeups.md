@@ -12,13 +12,13 @@ excerpt_separator:  <!--more-->
 <li><a href="#crypto_0100_32_32_64">crypto_0100_32_32_64</a></li>
 <li><a href="#crypto_0200_easy_rsa">crypto_0200_easy_rsa</a></li>
 <li><a href="#crypto_0200_strengthened_caesar">crypto_0200_strengthened_caesar</a></li>
-<li><a href="#crypto_250_bdv">crypto_250_bdv</a></li>
+<li><a href="#crypto_0250_bdv">crypto_0250_bdv</a></li>
 <li><a href="#stega_350_decalage">stega_350_decalage</a></li>
 <li><a href="#crypto_500_rsa">crypto_500_rsa</a></li>
 <li><a href="#crypto_0800_rsa_server">crypto_0800_rsa_server</a></li>
 <li><a href="#enc_050_quick_response_code">enc_050_quick_response_code</a></li>
 <li><a href="#enc_050_wtf">enc_050_wtf</a></li>
-<li><a href="#MISC_0150_Inutile_v4">MISC_0150_Inutile_v4</a></li>
+<li><a href="#misc_0150_inutile_v4">misc_0150_inutile_v4</a></li>
 <li><a href="#prog_0600_timing_attack">prog_0600_timing_attack</a></li>
 <li><a href="#pwn_0200_overflow_1">pwn_0200_overflow_1</a></li>
 <li><a href="#pwn_0400_overflow_2">pwn_0400_overflow_2</a></li>
@@ -33,7 +33,7 @@ excerpt_separator:  <!--more-->
 <li><a href="#stega_0200_do_not_trust_me">stega_0200_do_not_trust_me</a></li>
 <li><a href="#sonic_0200_sonic">sonic_0200_sonic</a></li>
 <li><a href="#stega_0300_anti_sonic">stega_0300_anti_sonic</a></li>
-<li><a href="#stega_300_biscuit">stega_300_biscuit</a></li>
+<li><a href="#stega_0300_biscuit">stega_0300_biscuit</a></li>
 <li><a href="#stega_300_extraction">stega_300_extraction</a></li>
 <li><a href="#stega_0300_read_me_2">stega_0300_read_me_2</a></li>
 <li><a href="#stega_0400_samuel">stega_0400_samuel</a></li>
@@ -271,7 +271,7 @@ for new_mot in liste :
 
 
 
-# crypto_250_bdv
+# crypto_0250_bdv
 
 ---
 
@@ -346,6 +346,7 @@ Qudn yate ! Aq bhpxkecsdrmine. Vous pouvez valider le message CRYPTIS{combo_vig_
 ```
 
 `CRYPTIS{combo_vig_base_sq}`
+
 
 # stega_350_decalage
 
@@ -977,7 +978,7 @@ Utilisation du même site pour retrouver le flag
 
 
 
-# MISC_0150_Inutile_v4
+# misc_0150_inutile_v4
 
 ------
 
@@ -2910,7 +2911,7 @@ CRYPTIS{good_job<3}
 
 
 
-# stega_300_biscuit
+# stega_0300_biscuit
 
 ---
 
@@ -2980,6 +2981,7 @@ CRYPTIS{cR4çk3r_b15cUi7}
 ```
 
 `CRYPTIS{cR4çk3r_b15cUi7}`
+
 
 # stega_300_extraction
 
@@ -3162,7 +3164,7 @@ On obtient :
 
 ------
 
-Jacquoille et le lsb...
+Jacquouille et le lsb...
 
 ------
 
@@ -3170,7 +3172,57 @@ Jacquoille et le lsb...
 
 ------
 
-//TODO
+Le but de ce challenge est de faire découvrir le LSB (Least significant bit) aux participants.
+
+> In digital steganography, sensitive messages may be concealed by manipulating and storing information in the least significant bits of an image or a sound file.
+
+Nous allons cacher `CRYPTIS{lsb_is_easy}` dans les pixels d'une image. Nous utiliserons ce script:
+
+```python
+import sys
+from PIL import Image
+import binascii
+
+def to_8bits(c):
+    chaine = bin(c)[2:]
+    return '0' * (8 - len(chaine)) + chaine
+
+def edit_pix(pix, bits):
+    r,g,b = pix[0],pix[1],pix[2] # edit the RED
+    r_new,g_new,b_new = bin(pix[2])[2:],bin(pix[1])[2:],bin(pix[0])[2:] # edit the RED
+
+    b_new = bin(b)[2:-1] + bits[0]
+    if len(bits) >= 2: g_new = bin(g)[2:-1] + bits[1]
+    if len(bits) >= 3: r_new = bin(r)[2:-1] + bits[2]
+    return (int(r_new, 2), int(g_new, 2), int(b_new, 2))
+
+def hide(src, dst, mess):
+
+    img = Image.open(src)
+    mess_bin = ''.join([to_8bits(c) for c in mess])
+    dimX,dimY = img.size
+    data = img.load()
+    pos_x,pos_y = 0,0
+
+    for i in range(0, len(mess_bin), 3):
+        data[pos_x,pos_y] = edit_pix(data[pos_x,pos_y], mess_bin[i:i+3])
+        pos_x += 1
+        if pos_x == dimX:
+            pos_x = 0
+            pos_y += 1
+        if pos_y > dimY:
+            print('Image pas assez grande')
+            exit(1)
+
+    img.save(dst)
+    
+message = b'CRYPTIS{lsb_is_easy}'
+hide(src='fripouille_base.png', dst='fripouille.png', mess=message)
+```
+
+Nous allons utiliser le dernier bit de chaque couleur (Red, Green, Blue) afin d'y cacher un bit de notre flag. Pour complexifier notre challenge nous n'allons pas cacher nos bits dans un ordre classique, dans le Red, puis dans Green et puis dans Blue. Mais nous allons inverser cette ordre.
+
+Nous allons cacher 3 bits par pixel, le premier dans le Blue, le second dans Green et le dernier dans Red.
 
 ------
 
@@ -3178,7 +3230,40 @@ Jacquoille et le lsb...
 
 ------
 
-//TODO
+Avec le titre on pense rapidement que l'image contient des données cachées en LSB.
+
+```python
+def extract(src):
+
+    img = Image.open(src)
+
+    dimX,dimY = img.size
+    data = img.load()
+    all_bits = ''
+
+    #for y in range(dimY):
+    for y in range(1):
+        #for x in range(dimX):
+        for x in range(55):
+            r,g,b = data[x,y]
+            r_bit = bin(r)[2:][-1]
+            g_bit = bin(g)[2:][-1]
+            b_bit = bin(b)[2:][-1]
+            all_bits += b_bit + g_bit + r_bit
+
+    tab_all_bits = [all_bits[i:i+8] for i in range(0, len(all_bits), 8)]
+
+    return''.join([chr(int(c,2)) for c in tab_all_bits])
+```
+
+Il ne reste plus qu'a trouvé le bonne ordre des données dans les bits. Dans notre cas, c'est BGR.
+
+```bash
+$ python3 lsb.py
+Extraction
+CRYPTIS{lsb_is_easy}
+Done
+```
 
 `CRYPTIS{lsb_is_easy}`
 
@@ -3463,3 +3548,5 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
 
 `CRYPTIS{Cr0sS_s1t3_scr1pt1ng_b3g1nn1ng}`
+
+
